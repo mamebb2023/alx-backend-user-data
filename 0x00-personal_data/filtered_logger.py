@@ -55,9 +55,36 @@ def get_logger() -> logging.Logger:
 def get_db() -> mysql.connector.connection.MySQLConnection:
     """ Get a sequre database access
     """
-    return mysql.connector.connection(
+    return mysql.connector.connect(
                 user=getenv('PERSONAL_DATA_DB_USERNAME'),
                 password=getenv('PERSONAL_DATA_DB_PASSWORD'),
                 host=getenv('PERSONAL_DATA_DB_HOST'),
                 database=getenv('PERSONAL_DATA_DB_NAME')
             )
+
+
+def main() -> None:
+    """ Main Function
+    """
+    db = get_db()
+    cursor = db.cursor()
+    query = "SELECT * FROM users"
+    cursor.execute(query)
+    formatter = get_logger()
+    for (
+            name,
+            email,
+            ssn,
+            phone,
+            password,
+            ip,
+            last_login,
+            user_agent) in cursor:
+        message = f"name={name}; email={email}; phone={phone}; ssn={ssn}; password={password}; ip={ip}; last_login={last_login}; user_agent={user_agent};"  #nopep8
+        formatter.info(message)
+    cursor.close()
+    db.close()
+
+
+if __name__ == "__main__":
+    main()
