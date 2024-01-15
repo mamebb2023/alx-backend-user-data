@@ -80,7 +80,7 @@ def main() -> None:
             ip,
             last_login,
             user_agent) in cursor:
-        message = f"name={name}; email={email}; phone={phone}; ssn={ssn}; password={password}; ip={ip}; last_login={last_login}; user_agent={user_agent};"  #nopep8
+        message = f"name={name}; email={email}; phone={phone}; ssn={ssn}; password={password}; ip={ip}; last_login={last_login}; user_agent={user_agent};"  # nopep8
         formatter.info(message)
     cursor.close()
     db.close()
