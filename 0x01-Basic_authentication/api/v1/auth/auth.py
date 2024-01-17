@@ -13,7 +13,7 @@ class Auth():
         """
         if not path or not excluded_paths:
             return True
-        p_path = path + '/' if path[-1] != '/'
+        p_path = path + '/' if path[-1] != '/' else path
         for p_path in excluded_paths:
             t_path = path[:-1] if path[-1] != '/' else path
             if p_path.startwith(t_path):
