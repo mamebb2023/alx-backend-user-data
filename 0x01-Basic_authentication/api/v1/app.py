@@ -23,8 +23,8 @@ if getenv("AUTH_TYPE") == "auth":
 def check_auth():
     """ Authorization Checker
     """
-    auth_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-    requires_auth = auth.require_auth(request.path, auth_list)
+    a_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    requires_auth = auth.require_auth(request.path, a_list)
 
     if not requires_auth:
         return None
