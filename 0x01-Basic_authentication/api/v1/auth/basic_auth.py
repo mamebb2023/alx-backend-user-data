@@ -76,8 +76,8 @@ class BasicAuth(Auth):
         """
         auth_hdr = self.authorization_header(request)
         extract_auth_hdr = self.extract_base64_authorization_header(auth_hdr)
-        decode_auth_hdr = self.decode_base64_authorization_header(extract_auth_hdr)
-        usr_credentials = self.extract_user_credentials(decode_auth_hdr)
+        de_auth_hdr = self.decode_base64_authorization_header(extract_auth_hdr)
+        usr_credentials = self.extract_user_credentials(de_auth_hdr)
         usr_email = usr_credentials[0]
         usr_pwd = usr_credentials[1]
         user = self.user_object_from_credentials(usr_email, usr_pwd)
