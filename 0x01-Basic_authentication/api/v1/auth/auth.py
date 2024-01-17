@@ -34,8 +34,3 @@ class Auth():
         """ Current User
         """
         return None
-
-class BasicAuth():
-    """ Basic Authorization
-    """
-    None
