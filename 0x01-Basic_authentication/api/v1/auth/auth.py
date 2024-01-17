@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Auth API
 """
-from flask import requests
+from flask import request
 
 
 class Auth():
