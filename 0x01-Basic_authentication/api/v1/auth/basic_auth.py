@@ -5,4 +5,3 @@
 class BasicAuth():
     """ Basic Authorization class
     """
-    None
