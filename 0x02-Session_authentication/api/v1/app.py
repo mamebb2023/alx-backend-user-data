@@ -29,13 +29,14 @@ else:
 def check_auth():
     """ Authorization Checker
     """
-    a_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
-    requires_auth = auth.require_auth(request.path, a_list)
+    excluded_list = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/', '/api/v1/auth_session/login/']  # nopep8
+    requires_auth = auth.require_auth(request.path, excluded_list)
 
     if not requires_auth:
         return None
-    if not auth.authorization_header(request):
+    if not auth.authorization_header(request) or not auth.session_cookie(request):  # nopep8
         abort(401)
+
     user = auth.current_user(request)
     if not user:
         abort(403)
