@@ -34,7 +34,7 @@ def check_auth():
 
     if not requires_auth:
         return None
-    if not auth.authorization_header(request) or not auth.session_cookie(request):  # nopep8
+    if not auth.authorization_header(request) and not auth.session_cookie(request):  # nopep8
         abort(401)
 
     user = auth.current_user(request)
