@@ -22,7 +22,7 @@ def usr_login():
 
     valid_user = User.search({"email": email})
     if not valid_user:
-        return jsonify({"error": "no user found for this email"}), 401
+        return jsonify({"error": "no user found for this email"}), 404
 
     valid_user = valid_user[0]
     if not valid_user.is_valid_password(pwd):
