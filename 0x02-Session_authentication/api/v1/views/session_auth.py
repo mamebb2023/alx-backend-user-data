@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
 """ Session View
 """
+from os import getenv
 from flask import jsonify, request
 
 from api.v1.views import app_views
+from models.user import User
 
 
-@app_views.route("/auth_session/login", method=["POST"], strict_slashes=False)
+@app_views.route("/auth_session/login", methods=["POST"], strict_slashes=False)
 def usr_login():
     """ User Session Login
     """
     email = request.form.get('email')
-    pwd = requst.form.get('password')
+    pwd = request.form.get('password')
 
     if not email:
         return jsonify({ "error": "email missing" }), 400
@@ -28,6 +30,6 @@ def usr_login():
 
     from api.v1.app import auth
     s_id = auth.create_session(valid_user.id)
-    r = jsonify(user.to_json())
+    r = jsonify(valid_user.to_json())
     r.set_cookie(getenv("SESSION_NAME"), s_id)
     return r
