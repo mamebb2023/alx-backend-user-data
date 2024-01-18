@@ -16,17 +16,17 @@ def usr_login():
     pwd = request.form.get('password')
 
     if not email:
-        return jsonify({ "error": "email missing" }), 400
+        return jsonify({"error": "email missing"}), 400
     if not pwd:
-        return jsonify({ "error": "password missing" }), 400
+        return jsonify({"error": "password missing"}), 400
 
-    valid_user = User.search({ "email": email })
+    valid_user = User.search({"email": email})
     if not valid_user:
-        return jsonify({ "error": "no user found for this email" }), 401
+        return jsonify({"error": "no user found for this email"}), 401
 
     valid_user = valid_user[0]
     if not valid_user.is_valid_password(pwd):
-        return jsonify({ "error": "wrong password" }), 401
+        return jsonify({"error": "wrong password"}), 401
 
     from api.v1.app import auth
     s_id = auth.create_session(valid_user.id)
