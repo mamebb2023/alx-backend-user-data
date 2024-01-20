@@ -35,14 +35,13 @@ def usr_login():
     return r
 
 
-@app_views.route("/auth_session/logout", methods=["DELETE"], strict_slashes=False)
+@app_views.route("/auth_session/logout", methods=["DELETE"], strict_slashes=False)  # nopep8
 def usr_logout():
     """ User Logout
     """
     from api.v1.app import auth
-
     delete = auth.destroy_session(request)
-    
+
     if delete is False:
         abort(404)
 
