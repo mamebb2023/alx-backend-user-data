@@ -68,20 +68,13 @@ def main() -> None:
     """
     db = get_db()
     cursor = db.cursor()
-    query = "SELECT * FROM users"
+    query = "SELECT * FROM users;"
     cursor.execute(query)
     formatter = get_logger()
-    for (
-            name,
-            email,
-            ssn,
-            phone,
-            password,
-            ip,
-            last_login,
-            user_agent) in cursor:
-        message = f"name={name}; email={email}; phone={phone}; ssn={ssn}; password={password}; ip={ip}; last_login={last_login}; user_agent={user_agent};"  # nopep8
-        formatter.info(message)
+    for row in cursor:
+        message = ';'.join(["{}={}".format(key, value)
+                            for key, value in row.items()])
+        logger.info(message)
     cursor.close()
     db.close()
 
